@@ -1,0 +1,33 @@
+{
+  "name": "dokument.dtek.se",
+  "version": "0.0.1",
+  "description": "Website to display and manage public documents for easy access with changelogs",
+  "main": "build.js",
+  "scripts": {
+    "test": "./node_modules/jshint/bin/jshint ./build.js"
+  },
+  "engines": {
+    "node": ">=8.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dtekcth/dokument.dtek.se.git"
+  },
+  "keywords": [
+    "documents",
+    "website"
+  ],
+  "author": "Emil Hemdal <emil+document-dtek-se@hemdal.se>",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/dtekcth/dokument.dtek.se/issues"
+  },
+  "homepage": "https://github.com/dtekcth/dokument.dtek.se#readme",
+  "devDependencies": {
+    "clean-css": "^4.1.9",
+    "del": "^3.0.0",
+    "jshint": "^2.9.5",
+    "pug": "^2.0.0-rc.4",
+    "purecss": "^1.0.0"
+  }
+}

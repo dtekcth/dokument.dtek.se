@@ -1,0 +1,188 @@
+
+/*!
+
+    Document database to find documents easier.
+
+    Copyright 2018 Emil Hemdal
+    Copyright 2018 Datateknologsektionen Chalmers Studentkår
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-height: 100%;
+    min-width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-size: 0.9em;
+}
+
+body:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url(./img/datalogo.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 5%;
+    background-size: 50%;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+
+#layout, #main {
+    height: 100%;
+    position: relative;
+}
+
+#main {
+    display: none;
+}
+
+#item-info { /* Ensures that the #pdfView doesn't cover the #item-info */
+    position: relative;
+    z-index: 1;
+}
+
+#item-info h2, #item-info h3, #item-info p {
+    margin: 0.5rem 0;
+    padding: 0 1rem;
+}
+
+#main h2, #main h3, #main p {
+    margin: 0.5rem 0;
+    padding: 0 1rem;
+}
+
+.infoButton {
+    margin: 0.5rem 0.25rem;
+}
+
+#pdfView {
+    position: absolute;
+    top: 0;
+}
+
+#list h4, #list h5, #list p {
+    margin: 4px 0;
+}
+
+
+iframe, #pdfView {
+    width: 100%;
+    height: 100%;
+}
+
+.dynamic-border {
+    border-right: none;
+    border-bottom: #000 1px solid;
+}
+
+.no-bullet {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.scrollable-interior {
+    height: 50%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-shadow: 1px 1px 2px #FFF, -1px 1px 2px #FFF, 1px -1px 2px #FFF, -1px -1px 2px #FFF;
+}
+
+.mobile-link {
+    display: block;
+}
+.desktop-link {
+    display: none;
+}
+
+.item {
+    margin: 0;
+}
+
+.item .pure-menu-link {
+    padding: 0.5em 0em;
+}
+
+.item h5, .item h4, .item p {
+    margin: 0;
+}
+
+
+@media screen and (min-width:35.5em) {
+    body:after {
+        background-position: 12.5% 50%;
+        background-size: 33.33%;
+    }
+    .scrollable-interior {
+        height: 100%;
+    }
+    .dynamic-border {
+        border-right: #000 1px solid;
+        border-bottom: none;
+    }
+}
+
+@media screen and (min-width:64em) {
+    #item-info {
+        height: 86px;
+    }
+
+    #pdfView {
+        padding-top: 86px;
+    }
+
+    .scrollable-interior {
+        height: 100%;
+    }
+    #main {
+        display: block;
+    }
+
+    .mobile-link {
+        display: none;
+    }
+    .desktop-link {
+        display: block;
+    }
+}
+
+@media screen and (min-width:80em) {
+    html {
+        font-size: 1.0em;
+    }
+
+    #item-info {
+        height: 96px;
+    }
+
+    #pdfView {
+        padding-top: 96px;
+    }
+
+}

@@ -1,0 +1,107 @@
+
+//-
+
+    Document database to find documents easier.
+
+    Copyright 2018 Emil Hemdal
+    Copyright 2018 Datateknologsektionen Chalmers Studentkår
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
+mixin docItem(mobile, item)
+  a(class='pure-menu-link' + (mobile ? ' mobile-link' : ' desktop-link') href=basePath + (mobile ? item.directLink : item.pageLink))
+    - var fileType = item.name.substr(item.name.length - 3)
+    if  fileType === 'pdf'
+      img.file-type.pure-u(width='64', height='64', alt='PDF logo', src=basePath + 'img/PDF.svg')
+    else if fileType === 'tex'
+      img.file-type.pure-u(width='64', height='64', alt='TeX logo', src=basePath + 'img/TEX.svg')
+    .pure-u
+      h4.name=item.meta.niceName
+      h5.date=item.meta.pubDate
+      if item.meta.description
+        p.description=item.meta.description
+
+mixin quickItem(mobile, item)
+  a(class='pure-menu-link' + (mobile ? ' mobile-link' : ' desktop-link') href=basePath + (mobile ? item.directLink : item.pageLink))
+    =item.meta.niceName
+
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    if selectedDocument
+      meta(name='description', content='Dokumentdatabasen för Datateknologsektionen Chalmers Studentkår. ' + selectedDocument.meta.description)
+      title='Datateknologsektionen Chalmers Studentkår | Dokumentdatabasen | ' + selectedDocument.meta.niceName
+    else
+      meta(name='description', content='Dokumentdatabasen för Datateknologsektionen Chalmers Studentkår.')
+      title Datateknologsektionen Chalmers Studentkår | Dokumentdatabasen
+    //
+      Document database to find documents easier.
+      Copyright 2018 Emil Hemdal
+      Copyright 2018 Datateknologsektionen Chalmers Studentkår
+      This program is free software: you can redistribute it and/or modify
+      it under the terms of the GNU Affero General Public License as
+      published by the Free Software Foundation, either version 3 of the
+      License, or (at your option) any later version.
+      This program is distributed in the hope that it will be useful,
+      but WITHOUT ANY WARRANTY; without even the implied warranty of
+      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+      GNU Affero General Public License for more details.
+      You should have received a copy of the GNU Affero General Public License
+      along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    link(rel='stylesheet', href=basePath + 'style.min.css')
+  body
+    #layout.content.pure-g
+      .pure-u-1.pure-u-lg-1-4.pure-u-sm-1-2.scrollable-interior.dynamic-border
+        ul.no-bullet
+          - for (let category of categories)
+            li(class='pure-menu-item' + (category.selected ? ' pure-menu-active' : ''))
+              a.pure-menu-link(href=basePath + category.path)
+                if category.sv === category.en
+                  =category.sv
+                else
+                  =category.sv
+                  | /
+                  br
+                  =category.en
+          li.pure-menu-heading Genväg / Shortcut
+          - for (let shortcut of shortcuts)
+            li.pure-menu-item
+              +quickItem(true, shortcut)
+              +quickItem(false, shortcut)
+      #list.pure-u-1.pure-u-sm-1-2.pure-u-lg-1-4.scrollable-interior.dynamic-border
+        ul.no-bullet
+          - for (let category of categories)
+            if category.selected
+              - for (let file of category.files)
+                li(class='pure-menu-item' + (file.selected ? ' pure-menu-active' : ''))
+                  +docItem(true, file)
+                  +docItem(false, file)
+      #main.pure-u-1.pure-u-lg-1-2
+        if selectedDocument
+          #item-info.pure-g
+            .pure-u-1-2
+              h2.name=selectedDocument.meta.niceName
+              h3.name=selectedDocument.meta.pubDate
+              if selectedDocument.meta.description
+                p.date=selectedDocument.meta.description
+            .pure-u-1-2
+              a.secondary-button.pure-button.infoButton(href=basePath + selectedDocument.directLink) Ladda ner PDF / Download PDF
+              a.secondary-button.pure-button.infoButton(href=selectedDocument.meta.githubPage) Källa / Source
+          #pdfView
+            iframe(src=basePath + selectedDocument.directLink)
+        else
+          h3 Vänligen välj ett dokument / Please choose a document
