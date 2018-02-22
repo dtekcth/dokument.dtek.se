@@ -21,7 +21,7 @@
 
 
 mixin docItem(mobile, item)
-  a(class='pure-menu-link' + (mobile ? ' mobile-link' : ' desktop-link') href=basePath + (mobile ? item.directLink : item.pageLink))
+  a(class='pure-menu-link' + (mobile ? ' mobile-link' : ' desktop-link') href=basePath + (mobile ? item.directLink : item.pageLink) target=(mobile ? '_blank' : false))
     - var fileType = item.name.substr(item.name.length - 3)
     if  fileType === 'pdf'
       img.file-type.pure-u(width='64', height='64', alt='PDF logo', src=basePath + 'img/PDF.svg')
@@ -34,7 +34,7 @@ mixin docItem(mobile, item)
         p.description=item.meta.description
 
 mixin quickItem(mobile, item)
-  a(class='pure-menu-link' + (mobile ? ' mobile-link' : ' desktop-link') href=basePath + (mobile ? item.directLink : item.pageLink))
+  a(class='pure-menu-link' + (mobile ? ' mobile-link' : ' desktop-link') href=basePath + (mobile ? item.directLink : item.pageLink) target=(mobile ? '_blank' : false))
     =item.meta.niceName
 
 doctype html
@@ -99,7 +99,7 @@ html(lang='en')
               if selectedDocument.meta.description
                 p.date=selectedDocument.meta.description
             .pure-u-1-2
-              a.secondary-button.pure-button.infoButton(href=basePath + selectedDocument.directLink) Ladda ner PDF / Download PDF
+              a.secondary-button.pure-button.infoButton(href=basePath + selectedDocument.directLink target='_blank') Ladda ner PDF / Download PDF
               a.secondary-button.pure-button.infoButton(href=selectedDocument.meta.githubPage) Källa / Source
           #pdfView
             iframe(src=basePath + selectedDocument.directLink)
