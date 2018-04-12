@@ -1,7 +1,7 @@
 {
   "pubDate": "2017-05-15",
-  "niceName": "Reglemente",
-  "description": "DTek reglemente",
+  "niceName": "Reglemente (gammal)",
+  "description": "DTek reglemente (gammal)",
   "githubPage": "https://github.com/dtekcth/styrdokument/tree/master/reglemente",
-  "shortcut": true
+  "shortcut": false
 }
