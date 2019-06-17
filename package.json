@@ -24,10 +24,10 @@
   },
   "homepage": "https://github.com/dtekcth/dokument.dtek.se#readme",
   "devDependencies": {
-    "clean-css": "^4.1.9",
+    "clean-css": "^4.2.1",
     "del": "^3.0.0",
-    "jshint": "^2.9.5",
-    "pug": "^2.0.0-rc.4",
+    "jshint": "^2.10.2",
+    "pug": "^2.0.3",
     "purecss": "^1.0.0"
   }
 }
